@@ -1,18 +1,11 @@
-from celery import shared_task
-from gql import gql, Client
-from gql.transport.requests import RequestsHTTPTransport
+import requests
 from datetime import datetime
+from celery import shared_task
 
 @shared_task
 def generate_crm_report():
-    transport = RequestsHTTPTransport(
-        url="http://localhost:8000/graphql",
-        verify=True,
-        retries=3,
-    )
-    client = Client(transport=transport, fetch_schema_from_transport=True)
-
-    query = gql("""
+    url = "http://localhost:8000/graphql"
+    query = """
     query {
       customers {
         totalCount
@@ -22,13 +15,14 @@ def generate_crm_report():
         totalAmountSum
       }
     }
-    """)
-
+    """
     try:
-        result = client.execute(query)
-        customers = result["customers"]["totalCount"]
-        orders = result["orders"]["totalCount"]
-        revenue = result["orders"]["totalAmountSum"]
+        response = requests.post(url, json={'query': query})
+        data = response.json()['data']
+
+        customers = data["customers"]["totalCount"]
+        orders = data["orders"]["totalCount"]
+        revenue = data["orders"]["totalAmountSum"]
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_file = "/tmp/crm_report_log.txt"
