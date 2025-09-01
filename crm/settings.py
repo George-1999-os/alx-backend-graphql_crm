@@ -16,3 +16,7 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(day_of_week='mon', hour=6, minute=0),
     },
 }
+
+# Celery Broker & Backend (Redis)
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
