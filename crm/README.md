@@ -1,17 +1,17 @@
-# CRM Celery Report Task
+# CRM Cron Jobs Setup
 
-## Setup
+This module configures scheduled background tasks for the CRM application using **django-crontab** and **GraphQL**.
 
-1. Install Redis and dependencies:
-   pip install -r requirements.txt
+---
 
-2. Run migrations:
-   python manage.py migrate
+## Requirements
 
-3. Start Celery worker:
-   celery -A crm worker -l info
+- Python 3
+- Django
+- django-crontab
+- gql
 
-4. Start Celery Beat:
-   celery -A crm beat -l info
+Install dependencies:
 
-5. Verify logs in /tmp/crm_report_log.txt
+```bash
+pip install -r requirements.txt
