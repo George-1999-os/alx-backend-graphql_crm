@@ -1,15 +1,17 @@
-# CRM Cron Jobs Setup
+# CRM Background Tasks Setup
 
-This module configures scheduled background tasks for the CRM application using **django-crontab** and **GraphQL**.
+This document describes how to set up and run scheduled and asynchronous background tasks for the CRM application.
 
 ---
 
 ## Requirements
 
-- Python 3
+- Python 3.10+
+- Redis
 - Django
+- Celery
 - django-crontab
-- gql
+- django-celery-beat
 
 Install dependencies:
 
