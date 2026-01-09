@@ -1,19 +1,10 @@
 # CRM Background Tasks Setup
 
-This document describes how to set up and run scheduled and asynchronous background tasks for the CRM application.
+This document explains how to set up cron jobs and Celery background tasks for the CRM project.
 
 ---
 
-## Requirements
-
-- Python 3.10+
-- Redis
-- Django
-- Celery
-- django-crontab
-- django-celery-beat
-
-Install dependencies:
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
