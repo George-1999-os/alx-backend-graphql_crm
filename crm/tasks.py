@@ -28,6 +28,12 @@ def generate_crm_report():
         log_file = "/tmp/crm_report_log.txt"
 
         with open(log_file, "a") as f:
-            f.write(f"{timestamp} - Report: {customers} customers, {orders} orders, {revenue} revenue\n")
-    except Exception:
-        pass
+            f.write(
+                f"{timestamp} - Report: {customers} customers, "
+                f"{orders} orders, {revenue} revenue\n"
+            )
+
+    except Exception as e:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open("/tmp/crm_report_log.txt", "a") as f:
+            f.write(f"{timestamp} - ERROR generating report: {str(e)}\n")
